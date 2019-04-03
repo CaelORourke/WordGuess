@@ -19,17 +19,21 @@ console.log(currentWord);
 
 // TODO: choose a word
 
-// display the wins
-document.getElementById("wins").innerHTML = wins;
+function displayStats() {
+    // display the wins
+    document.getElementById("wins").innerHTML = wins;
 
-// display the losses
-document.getElementById("losses").innerHTML = losses;
+    // display the losses
+    document.getElementById("losses").innerHTML = losses;
 
-// display the guesses remaining
-document.getElementById("guessesRemaining").innerHTML = guessesRemaining;
+    // display the guesses remaining
+    document.getElementById("guessesRemaining").innerHTML = guessesRemaining;
 
-// display the wrong guesses
-document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
+    // display the wrong guesses
+    document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
+}
+
+displayStats();
 
 // listen for letters that players type
 document.onkeyup = function (event) {
@@ -51,16 +55,6 @@ document.onkeyup = function (event) {
             wrongGuesses.push(keyPressed);
         }
 
-        // display the wins
-        document.getElementById("wins").innerHTML = wins;
-
-        // display the losses
-        document.getElementById("losses").innerHTML = losses;
-
-        // display the guesses remaining
-        document.getElementById("guessesRemaining").innerHTML = guessesRemaining;
-
-        // display the wrong guesses
-        document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
+        displayStats()
     }
 }
