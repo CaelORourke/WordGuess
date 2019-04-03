@@ -1,12 +1,9 @@
 // WHAT TO TRACK
 // a list of words to guess
-// the current word to guess
 // track wrong guesses
 
 // WHAT TO DO
-// TODO: choose a word
 // TODO: restart the game
-// TODO: check if key pressed is in the current word
 // TODO: check if user won
 // TODO: check is user lost
 // TODO: display the wrong guesses
@@ -16,6 +13,12 @@ var wins = 0;
 var losses = 0;
 var guessesRemaining = 10;
 var keyPressed = "";
+var currentWord = "shane";
+
+// useful for debugging
+console.log(currentWord);
+
+// TODO: choose a word
 
 // display the wins
 document.getElementById("wins").innerHTML = wins;
@@ -36,5 +39,16 @@ document.onkeyup = function(event) {
     {
         console.log(event.key.toLowerCase());
         keyPressed = event.key.toLowerCase();
+
+        // console.log(currentWord.indexOf(keyPressed));
+        // check if key pressed is in the current word
+        if (currentWord.indexOf(keyPressed) > -1)
+        {
+            console.log("correct guess");
+        }
+        else
+        {
+            console.log("wrong guess");
+        }
     }
 }
