@@ -1,21 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Word Guess</title>
 </head>
+
 <body>
     <!-- TODO: choose a cool theme -->
-    Press any key to get started!
-    Wins:
-    Losses:
-    Number of Guesses Remaining:
-    Letters Already Guessed:
-    _ _ _ _ _ _ _
-    m a d _ _ _ a
+    <div class="jumbotron">
+        <h1 class="display-4">Word Guess</h1>
+        <p class="lead">Guess the names of students.</p>
+        <hr class="my-4">
+        <p>Press any key to get started!</p>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <p class="card-text">Wins:</p>
+        </div>
+    </div>
+
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <p class="card-text">Losses:</p>
+        </div>
+    </div>
+    
+    <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <p class="card-text">Number of Guesses Remaining:</p>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Word to Guess:</h5>
+                    <p class="card-text">_ _ _ _ _ _ _</p>
+                    <!-- <p class="card-text">m a d _ _ _ a</p> -->
+                </div>
+            </div> 
+                
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Letters Already Guessed:</h5>
+            <p class="card-text">_ _ _ _ _ _ _</p>
+            <!-- <p class="card-text">m a d _ _ _ a</p> -->
+        </div>
+    </div> 
+    
     <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
+
 </html>
