@@ -2,6 +2,7 @@
 // TODO: restart the game
 // TODO: check if user won
 // TODO: display the current word
+// TODO: don't let the user make the same wrong guess
 
 var wins = 0;
 var losses = 0;
@@ -54,7 +55,12 @@ document.onkeyup = function (event) {
             guessesRemaining--;
         }
 
-        // TODO: check is user lost
+        // check is user lost
+        if (guessesRemaining < 1)
+        {
+            console.log("You lost!");
+            losses++;
+        }
 
         displayStats()
     }
