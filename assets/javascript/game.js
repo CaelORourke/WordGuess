@@ -1,6 +1,5 @@
 // WHAT TO DO
 // TODO: restart the game
-// TODO: check if user won
 // TODO: don't let the user make the same wrong guess
 
 var wins = 0;
@@ -13,18 +12,20 @@ var lettersToDisplay = [];
 var wrongGuesses = [];
 var wordsToGuess = ["michael", "vanessa", "jo", "jacquelyn"];
 
-// choose a word
-currentWord = wordsToGuess[Math.floor(Math.random() * wordsToGuess.length)];
-lettersInWord = currentWord.split("");
+function chooseRandomWord() {
+    // choose a word
+    currentWord = wordsToGuess[Math.floor(Math.random() * wordsToGuess.length)];
+    lettersInWord = currentWord.split("");
 
-for (let index = 0; index < lettersInWord.length; index++) {
-   lettersToDisplay[index] = "_";
+    for (let index = 0; index < lettersInWord.length; index++) {
+        lettersToDisplay[index] = "_";
+    }
+
+    // useful for debugging
+    console.log(currentWord);
+    console.log(lettersInWord);
+    console.log(lettersToDisplay);
 }
-
-// useful for debugging
-console.log(currentWord);
-console.log(lettersInWord);
-console.log(lettersToDisplay);
 
 function displayStats() {
     // display the current word
@@ -43,15 +44,15 @@ function displayStats() {
     document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
 }
 
+chooseRandomWord();
 displayStats();
 
 function updateWordDisplay(letter) {
     for (let index = 0; index < lettersInWord.length; index++) {
-        if (letter === lettersInWord[index])
-        {
+        if (letter === lettersInWord[index]) {
             lettersToDisplay[index] = letter;
         }
-     }
+    }
 }
 
 // listen for letters that players type
@@ -76,9 +77,13 @@ document.onkeyup = function (event) {
             guessesRemaining--;
         }
 
+        // check if user won
+        if (lettersInWord.toString() === lettersToDisplay.toString()) {
+            wins++;
+        }
+
         // check is user lost
-        if (guessesRemaining < 1)
-        {
+        if (guessesRemaining < 1) {
             console.log("You lost!");
             losses++;
         }
