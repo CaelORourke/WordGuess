@@ -27,6 +27,9 @@ console.log(lettersInWord);
 console.log(lettersToDisplay);
 
 function displayStats() {
+    // display the current word
+    document.getElementById("currentWord").innerHTML = lettersToDisplay.join(" ");
+
     // display the wins
     document.getElementById("wins").innerHTML = wins;
 
@@ -42,10 +45,14 @@ function displayStats() {
 
 displayStats();
 
-// display the current word
-document.getElementById("currentWord").innerHTML = lettersToDisplay.join(" ");
-//_ _ _ _ _ _ _
-//m a d _ _ _ a
+function updateWordDisplay(letter) {
+    for (let index = 0; index < lettersInWord.length; index++) {
+        if (letter === lettersInWord[index])
+        {
+            lettersToDisplay[index] = letter;
+        }
+     }
+}
 
 // listen for letters that players type
 document.onkeyup = function (event) {
@@ -61,6 +68,7 @@ document.onkeyup = function (event) {
         // check if key pressed is in the current word
         if (currentWord.indexOf(keyPressed) > -1) {
             console.log("correct guess");
+            updateWordDisplay(keyPressed);
         }
         else {
             console.log("wrong guess");
