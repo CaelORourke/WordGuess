@@ -1,23 +1,21 @@
-// WHAT TO TRACK
-// a list of words to guess
-
 // WHAT TO DO
 // TODO: restart the game
 // TODO: check if user won
-// TODO: check is user lost
 // TODO: display the current word
 
 var wins = 0;
 var losses = 0;
 var guessesRemaining = 10;
 var keyPressed = "";
-var currentWord = "shane";
+var currentWord = "";
 var wrongGuesses = [];
+var wordsToGuess = ["michael", "vanessa", "jo", "jacquelyn"];
+
+// choose a word
+currentWord = wordsToGuess[Math.floor(Math.random() * wordsToGuess.length)];
 
 // useful for debugging
 console.log(currentWord);
-
-// TODO: choose a word
 
 function displayStats() {
     // display the wins
@@ -53,7 +51,10 @@ document.onkeyup = function (event) {
         else {
             console.log("wrong guess");
             wrongGuesses.push(keyPressed);
+            guessesRemaining--;
         }
+
+        // TODO: check is user lost
 
         displayStats()
     }
