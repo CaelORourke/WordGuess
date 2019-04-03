@@ -1,7 +1,6 @@
 // WHAT TO DO
 // TODO: restart the game
 // TODO: check if user won
-// TODO: display the current word
 // TODO: don't let the user make the same wrong guess
 
 var wins = 0;
@@ -9,14 +8,23 @@ var losses = 0;
 var guessesRemaining = 10;
 var keyPressed = "";
 var currentWord = "";
+var lettersInWord = [];
+var lettersToDisplay = [];
 var wrongGuesses = [];
 var wordsToGuess = ["michael", "vanessa", "jo", "jacquelyn"];
 
 // choose a word
 currentWord = wordsToGuess[Math.floor(Math.random() * wordsToGuess.length)];
+lettersInWord = currentWord.split("");
+
+for (let index = 0; index < lettersInWord.length; index++) {
+   lettersToDisplay[index] = "_";
+}
 
 // useful for debugging
 console.log(currentWord);
+console.log(lettersInWord);
+console.log(lettersToDisplay);
 
 function displayStats() {
     // display the wins
@@ -33,6 +41,11 @@ function displayStats() {
 }
 
 displayStats();
+
+// display the current word
+document.getElementById("currentWord").innerHTML = lettersToDisplay.join(" ");
+//_ _ _ _ _ _ _
+//m a d _ _ _ a
 
 // listen for letters that players type
 document.onkeyup = function (event) {
