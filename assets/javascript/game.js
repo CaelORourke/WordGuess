@@ -22,9 +22,7 @@ function chooseRandomWord() {
     }
 
     // useful for debugging
-    console.log(currentWord);
-    console.log(lettersInWord);
-    console.log(lettersToDisplay);
+    console.log("currentWord='" + currentWord + "'");
 }
 
 function displayStats() {
@@ -41,7 +39,7 @@ function displayStats() {
     document.getElementById("guessesRemaining").innerHTML = guessesRemaining;
 
     // display the wrong guesses
-    document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
+    document.getElementById("wrongGuesses").innerHTML = wrongGuesses.join(" ");
 }
 
 function newGame() {
@@ -66,15 +64,11 @@ function updateWordDisplay(letter) {
 
 // listen for letters that players type
 document.onkeyup = function (event) {
-    // console.log(event.keyCode);
-    // console.log(event.key);
-
     // NOTE: we only care about letters
     if (event.keyCode >= 65 && event.keyCode <= 90) {
         console.log(event.key.toLowerCase());
         keyPressed = event.key.toLowerCase();
 
-        // console.log(currentWord.indexOf(keyPressed));
         // check if key pressed is in the current word
         if (currentWord.indexOf(keyPressed) > -1) {
             console.log("correct guess");
