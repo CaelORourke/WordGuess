@@ -47,6 +47,7 @@ function newGame() {
     wrongGuesses = [];
     chooseRandomWord();
     gameStarted = true;
+    displayStats();
 }
 
 function updateWordDisplay(letter) {
@@ -57,7 +58,7 @@ function updateWordDisplay(letter) {
     }
 }
 
-// listen for letters that players type
+// listen for keys that players type
 document.onkeyup = function (event) {
     // TODO: restart the game
     if (gameStarted) {
@@ -100,6 +101,5 @@ document.onkeyup = function (event) {
     }
     else {
         newGame();
-        displayStats();
     }
 }
