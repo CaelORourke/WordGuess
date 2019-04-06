@@ -44,7 +44,16 @@ function displayStats() {
     document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
 }
 
-chooseRandomWord();
+function newGame() {
+    guessesRemaining = 10;
+    keyPressed = "";
+    lettersInWord = [];
+    lettersToDisplay = [];
+    wrongGuesses = [];
+    chooseRandomWord();
+}
+
+newGame();
 displayStats();
 
 function updateWordDisplay(letter) {
@@ -80,6 +89,7 @@ document.onkeyup = function (event) {
         // check if user won
         if (lettersInWord.toString() === lettersToDisplay.toString()) {
             wins++;
+            newGame();
         }
 
         // check is user lost
