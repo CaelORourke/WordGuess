@@ -1,6 +1,5 @@
 // WHAT TO DO
 // TODO: restart the game
-// TODO: don't let the user make the same wrong guess
 
 var wins = 0;
 var losses = 0;
@@ -66,8 +65,14 @@ function updateWordDisplay(letter) {
 document.onkeyup = function (event) {
     // NOTE: we only care about letters
     if (event.keyCode >= 65 && event.keyCode <= 90) {
+
         console.log(event.key.toLowerCase());
         keyPressed = event.key.toLowerCase();
+
+        // don't let the user make the same wrong guess
+        if (wrongGuesses.indexOf(keyPressed) > -1) {
+            return;
+        }
 
         // check if key pressed is in the current word
         if (currentWord.indexOf(keyPressed) > -1) {
