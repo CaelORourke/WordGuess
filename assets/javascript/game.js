@@ -1,6 +1,3 @@
-// WHAT TO DO
-// TODO: restart the game
-
 var wins = 0;
 var losses = 0;
 var guessesRemaining = 10;
@@ -10,6 +7,7 @@ var lettersInWord = [];
 var lettersToDisplay = [];
 var wrongGuesses = [];
 var wordsToGuess = ["michael", "vanessa", "jo", "jacquelyn"];
+var gameStarted = false;
 
 function chooseRandomWord() {
     // choose a word
@@ -48,10 +46,8 @@ function newGame() {
     lettersToDisplay = [];
     wrongGuesses = [];
     chooseRandomWord();
+    gameStarted = true;
 }
-
-newGame();
-displayStats();
 
 function updateWordDisplay(letter) {
     for (let index = 0; index < lettersInWord.length; index++) {
@@ -63,40 +59,47 @@ function updateWordDisplay(letter) {
 
 // listen for letters that players type
 document.onkeyup = function (event) {
-    // NOTE: we only care about letters
-    if (event.keyCode >= 65 && event.keyCode <= 90) {
+    // TODO: restart the game
+    if (gameStarted) {
+        // NOTE: we only care about letters
+        if (event.keyCode >= 65 && event.keyCode <= 90) {
 
-        console.log(event.key.toLowerCase());
-        keyPressed = event.key.toLowerCase();
+            console.log(event.key.toLowerCase());
+            keyPressed = event.key.toLowerCase();
 
-        // don't let the user make the same wrong guess
-        if (wrongGuesses.indexOf(keyPressed) > -1) {
-            return;
+            // don't let the user make the same wrong guess
+            if (wrongGuesses.indexOf(keyPressed) > -1) {
+                return;
+            }
+
+            // check if key pressed is in the current word
+            if (currentWord.indexOf(keyPressed) > -1) {
+                console.log("correct guess");
+                updateWordDisplay(keyPressed);
+            }
+            else {
+                console.log("wrong guess");
+                wrongGuesses.push(keyPressed);
+                guessesRemaining--;
+            }
+
+            // check if user won
+            if (lettersInWord.toString() === lettersToDisplay.toString()) {
+                wins++;
+                newGame();
+            }
+
+            // check is user lost
+            if (guessesRemaining < 1) {
+                console.log("You lost!");
+                losses++;
+            }
+
+            displayStats()
         }
-
-        // check if key pressed is in the current word
-        if (currentWord.indexOf(keyPressed) > -1) {
-            console.log("correct guess");
-            updateWordDisplay(keyPressed);
-        }
-        else {
-            console.log("wrong guess");
-            wrongGuesses.push(keyPressed);
-            guessesRemaining--;
-        }
-
-        // check if user won
-        if (lettersInWord.toString() === lettersToDisplay.toString()) {
-            wins++;
-            newGame();
-        }
-
-        // check is user lost
-        if (guessesRemaining < 1) {
-            console.log("You lost!");
-            losses++;
-        }
-
-        displayStats()
+    }
+    else {
+        newGame();
+        displayStats();
     }
 }
