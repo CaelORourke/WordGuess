@@ -1,60 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Word Guess</title>
 </head>
-
 <body>
-    <!-- TODO: choose a cool theme -->
-    <div class="jumbotron">
-        <h1 class="display-4">Word Guess</h1>
-        <p class="lead">Guess the names of students.</p>
-        <hr class="my-4">
-        <p>Press any key to get started!</p>
-    </div>
-
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Word to Guess:</h5>
-            <p class="card-text"><span id="currentWord"></span></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron">
+                    <h1 class="display-4">Word Guess</h1>
+                    <p class="lead">Guess the names of students.</p>
+                    <hr class="my-4">
+                    <p>Press any key to get started!</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <img src="assets/images/kitty-551554_640.jpg">
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Word to Guess:</h5>
+                        <p class="card-text"><span id="currentWord"></span></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Letters Already Guessed:</h5>
+                        <p class="card-text"><span id="wrongGuesses"></span></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">Number of Guesses Remaining: <span id="guessesRemaining"></span></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">Wins: <span id="wins"></span></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">Losses: <span id="losses"></span></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Letters Already Guessed:</h5>
-            <p class="card-text"><span id="wrongGuesses"></span></p>
-        </div>
-    </div>
-
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <p class="card-text">Number of Guesses Remaining: <span id="guessesRemaining"></span></p>
-        </div>
-    </div>
-
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <p class="card-text">Wins: <span id="wins"></span></p>
-        </div>
-    </div>
-
-
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <p class="card-text">Losses: <span id="losses"></span></p>
-        </div>
-    </div>
-
-
-
     <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
-
 </html>
