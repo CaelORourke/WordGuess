@@ -9,115 +9,116 @@ var wrongGuesses = [];
 var wordsToGuess = ["michael", "vanessa", "jo", "jacquelyn"];
 var gameStarted = false;
 
-function chooseRandomWord() {
-    // choose a word
-    currentWord = wordsToGuess[Math.floor(Math.random() * wordsToGuess.length)];
-    lettersInWord = currentWord.split("");
+$(document).ready(function () {
+    function chooseRandomWord() {
+        // choose a word
+        currentWord = wordsToGuess[Math.floor(Math.random() * wordsToGuess.length)];
+        lettersInWord = currentWord.split("");
 
-    for (let index = 0; index < lettersInWord.length; index++) {
-        lettersToDisplay[index] = "_";
+        for (let index = 0; index < lettersInWord.length; index++) {
+            lettersToDisplay[index] = "_";
+        }
+
+        // useful for debugging
+        console.log("currentWord='" + currentWord + "'");
     }
 
-    // useful for debugging
-    console.log("currentWord='" + currentWord + "'");
-}
+    function displayStats() {
+        // display the current word
+        $("#currentWord").text(lettersToDisplay.join(" "));
 
-function displayStats() {
-    // display the current word
-    document.getElementById("currentWord").innerHTML = lettersToDisplay.join(" ");
+        // display the wins
+        $("#wins").text(wins);
 
-    // display the wins
-    document.getElementById("wins").innerHTML = wins;
+        // display the losses
+        $("#losses").text(losses);
 
-    // display the losses
-    document.getElementById("losses").innerHTML = losses;
+        // display the guesses remaining
+        $("#guessesRemaining").text(guessesRemaining);
 
-    // display the guesses remaining
-    document.getElementById("guessesRemaining").innerHTML = guessesRemaining;
+        // display the wrong guesses
+        $("#wrongGuesses").text(wrongGuesses.join(" "));
+    }
 
-    // display the wrong guesses
-    document.getElementById("wrongGuesses").innerHTML = wrongGuesses.join(" ");
-}
+    function newGame() {
+        guessesRemaining = 10;
+        keyPressed = "";
+        lettersInWord = [];
+        lettersToDisplay = [];
+        wrongGuesses = [];
+        chooseRandomWord();
+        gameStarted = true;
+        displayStats();
+    }
 
-function newGame() {
-    guessesRemaining = 10;
-    keyPressed = "";
-    lettersInWord = [];
-    lettersToDisplay = [];
-    wrongGuesses = [];
-    chooseRandomWord();
-    gameStarted = true;
-    displayStats();
-}
-
-function updateWordDisplay(letter) {
-    for (let index = 0; index < lettersInWord.length; index++) {
-        if (letter === lettersInWord[index]) {
-            lettersToDisplay[index] = letter;
+    function updateWordDisplay(letter) {
+        for (let index = 0; index < lettersInWord.length; index++) {
+            if (letter === lettersInWord[index]) {
+                lettersToDisplay[index] = letter;
+            }
         }
     }
-}
 
-function showQuitOrContinue(title, message) {
-    $('#winOrLossLabel').html(title);
-    $('#continueMessage').html(message);
-    $('#quitOrContinueDialog').modal('show');
-}
+    function showQuitOrContinue(title, message) {
+        $('#winOrLossLabel').html(title);
+        $('#continueMessage').html(message);
+        $('#quitOrContinueDialog').modal('show');
+    }
 
-// listen for keys that players type
-document.onkeyup = function (event) {
-    // TODO: restart the game
-    if (gameStarted) {
-        // NOTE: we only care about letters
-        if (event.keyCode >= 65 && event.keyCode <= 90) {
+    // listen for keys that players type
+    $(document).keyup(function (event) {
+        // TODO: restart the game
+        if (gameStarted) {
+            // NOTE: we only care about letters
+            if (event.keyCode >= 65 && event.keyCode <= 90) {
 
-            console.log(event.key.toLowerCase());
-            keyPressed = event.key.toLowerCase();
+                // console.log(event.key.toLowerCase());
+                keyPressed = event.key.toLowerCase();
 
-            // don't let the user make the same wrong guess
-            if (wrongGuesses.indexOf(keyPressed) > -1) {
-                return;
+                // don't let the user make the same wrong guess
+                if (wrongGuesses.indexOf(keyPressed) > -1) {
+                    return;
+                }
+
+                // check if key pressed is in the current word
+                if (currentWord.indexOf(keyPressed) > -1) {
+                    // console.log("correct guess");
+                    updateWordDisplay(keyPressed);
+                }
+                else {
+                    // console.log("wrong guess");
+                    wrongGuesses.push(keyPressed);
+                    guessesRemaining--;
+                }
+
+                // check if user won
+                if (lettersInWord.toString() === lettersToDisplay.toString()) {
+                    wins++;
+                    showQuitOrContinue("Congratulations!", "You won!");
+                    newGame();
+                }
+
+                // check is user lost
+                if (guessesRemaining < 1) {
+                    losses++;
+                    showQuitOrContinue("Sorry!", "You lost!");
+                }
+
+                displayStats()
             }
-
-            // check if key pressed is in the current word
-            if (currentWord.indexOf(keyPressed) > -1) {
-                console.log("correct guess");
-                updateWordDisplay(keyPressed);
-            }
-            else {
-                console.log("wrong guess");
-                wrongGuesses.push(keyPressed);
-                guessesRemaining--;
-            }
-
-            // check if user won
-            if (lettersInWord.toString() === lettersToDisplay.toString()) {
-                wins++;
-                showQuitOrContinue("Congratulations!", "You won!");
-                newGame();
-            }
-
-            // check is user lost
-            if (guessesRemaining < 1) {
-                console.log("You lost!");
-                losses++;
-                showQuitOrContinue("Sorry!", "You lost!");
-            }
-
-            displayStats()
         }
-    }
-    else {
-        newGame();
-    }
-}
+        else {
+            newGame();
+        }
+    });
 
-$("#continueGameButton").on("click", function() {
-    $('#quitOrContinueDialog').modal('hide');
-    // TODO: continue game
-})
+    $("#continueGameButton").on("click", function () {
+        $('#quitOrContinueDialog').modal('hide');
+        // TODO: continue game
+    });
 
-$("#quitGameButton, #closeButton").on("click", function() {
-    $('#quitOrContinueDialog').modal('hide');
-    // TODO: quit game
-})
+    $("#quitGameButton, #closeButton").on("click", function () {
+        $('#quitOrContinueDialog').modal('hide');
+        // TODO: quit game
+    });
+});
