@@ -58,6 +58,12 @@ function updateWordDisplay(letter) {
     }
 }
 
+function showQuitOrContinue(title, message) {
+    $('#winOrLossLabel').html(title);
+    $('#continueMessage').html(message);
+    $('#quitOrContinueDialog').modal('show');
+}
+
 // listen for keys that players type
 document.onkeyup = function (event) {
     // TODO: restart the game
@@ -87,10 +93,7 @@ document.onkeyup = function (event) {
             // check if user won
             if (lettersInWord.toString() === lettersToDisplay.toString()) {
                 wins++;
-                $('#winOrLossLabel').html("Congratulations!");
-                $('#continueMessage').html("You won!");
-                $('#quitOrContinueDialog').modal('show');
-                // $('#quitOrContinueDialog').modal('hide');
+                showQuitOrContinue("Congratulations!", "You won!");
                 newGame();
             }
 
@@ -98,10 +101,7 @@ document.onkeyup = function (event) {
             if (guessesRemaining < 1) {
                 console.log("You lost!");
                 losses++;
-                $('#winOrLossLabel').html("Sorry!");
-                $('#continueMessage').html("You lost!");
-                $('#quitOrContinueDialog').modal('show');
-                // $('#quitOrContinueDialog').modal('hide');
+                showQuitOrContinue("Sorry!", "You lost!");
             }
 
             displayStats()
@@ -111,3 +111,13 @@ document.onkeyup = function (event) {
         newGame();
     }
 }
+
+$("#continueGameButton").on("click", function() {
+    $('#quitOrContinueDialog').modal('hide');
+    // TODO: continue game
+})
+
+$("#quitGameButton, #closeButton").on("click", function() {
+    $('#quitOrContinueDialog').modal('hide');
+    // TODO: quit game
+})
