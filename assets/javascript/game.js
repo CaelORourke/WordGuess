@@ -87,6 +87,8 @@ document.onkeyup = function (event) {
             // check if user won
             if (lettersInWord.toString() === lettersToDisplay.toString()) {
                 wins++;
+                $('#winOrLossLabel').html("Congratulations!");
+                $('#continueMessage').html("You won!");
                 $('#quitOrContinueDialog').modal('show');
                 // $('#quitOrContinueDialog').modal('hide');
                 newGame();
@@ -96,6 +98,8 @@ document.onkeyup = function (event) {
             if (guessesRemaining < 1) {
                 console.log("You lost!");
                 losses++;
+                $('#winOrLossLabel').html("Sorry!");
+                $('#continueMessage').html("You lost!");
                 $('#quitOrContinueDialog').modal('show');
                 // $('#quitOrContinueDialog').modal('hide');
             }
