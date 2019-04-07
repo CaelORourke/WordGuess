@@ -5,7 +5,7 @@ var keyPressed = "";
 var currentWord = "";
 var lettersInWord = [];
 var lettersToDisplay = [];
-var wrongGuesses = [];
+var lettersGuessed = [];
 var gameStarted = false;
 
 $(document).ready(function () {
@@ -37,7 +37,7 @@ $(document).ready(function () {
     }
 
     function clearDisplay() {
-        $("#currentWord, #wins, #losses, #guessesRemaining, #wrongGuesses, #currentWordLabel, #winsLabel, #lossesLabel, #guessesRemainingLabel, #wrongGuessesLabel").empty();
+        $("#currentWord, #wins, #losses, #guessesRemaining, #lettersGuessed, #currentWordLabel, #winsLabel, #lossesLabel, #guessesRemainingLabel, #lettersGuessedLabel").empty();
     }
 
     function displayLabels() {
@@ -45,7 +45,7 @@ $(document).ready(function () {
         $("#winsLabel").text("Wins:");
         $("#lossesLabel").text("Losses:");
         $("#guessesRemainingLabel").text("Guesses Remaining:");
-        $("#wrongGuessesLabel").text("Letters Guessed:");
+        $("#lettersGuessedLabel").text("Letters Guessed:");
     }
 
     function displayStats() {
@@ -61,8 +61,8 @@ $(document).ready(function () {
         // display the guesses remaining
         $("#guessesRemaining").text(guessesRemaining);
 
-        // display the wrong guesses
-        $("#wrongGuesses").text(wrongGuesses.join(" "));
+        // display the letters guessed
+        $("#lettersGuessed").text(lettersGuessed.join(" "));
     }
 
     function resetGame() {
@@ -78,7 +78,7 @@ $(document).ready(function () {
         keyPressed = "";
         lettersInWord = [];
         lettersToDisplay = [];
-        wrongGuesses = [];
+        lettersGuessed = [];
         chooseRandomWord();
         getLettersToDisplay();
         gameStarted = true;
@@ -121,9 +121,12 @@ $(document).ready(function () {
                 // console.log(event.key.toLowerCase());
                 keyPressed = event.key.toLowerCase();
 
-                // don't let the user make the same wrong guess
-                if (wrongGuesses.indexOf(keyPressed) > -1) {
+                if (lettersGuessed.indexOf(keyPressed) > -1) {
+                    // don't let the user make the same guess
                     return;
+                }
+                else {
+                    lettersGuessed.push(keyPressed);
                 }
 
                 // check if key pressed is in the current word
@@ -134,7 +137,6 @@ $(document).ready(function () {
                 }
                 else {
                     // console.log("wrong guess");
-                    wrongGuesses.push(keyPressed);
                     guessesRemaining--;
                     playSound(wrongGuessSound);
                 }
