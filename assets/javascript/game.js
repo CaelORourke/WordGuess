@@ -9,6 +9,9 @@ var wrongGuesses = [];
 var gameStarted = false;
 
 $(document).ready(function () {
+    var correctGuessSound = $("#correctGuessSound")[0];
+    var wrongGuessSound = $("#wrongGuessSound")[0];
+
     function chooseRandomWord() {
         currentWord = wordsToGuess[Math.floor(Math.random() * wordsToGuess.length)];
 
@@ -30,7 +33,7 @@ $(document).ready(function () {
             }
         }
 
-        console.log(lettersToDisplay);
+        // console.log(lettersToDisplay);
     }
 
     function clearDisplay() {
@@ -96,6 +99,17 @@ $(document).ready(function () {
         $('#quitOrContinueDialog').modal('show');
     }
 
+    function playSound(sound) {
+        if (sound.paused) {
+            sound.play();
+        }
+        else {
+            sound.pause();
+            sound.currentTime = 0;
+            sound.play();
+        }
+    }
+
     resetGame();
 
     // listen for keys that players type
@@ -116,11 +130,13 @@ $(document).ready(function () {
                 if ((currentWord.indexOf(keyPressed) > -1) || (currentWord.indexOf(keyPressed.toUpperCase()) > -1)) {
                     // console.log("correct guess");
                     updateLettersToDisplay(keyPressed);
+                    playSound(correctGuessSound);
                 }
                 else {
                     // console.log("wrong guess");
                     wrongGuesses.push(keyPressed);
                     guessesRemaining--;
+                    playSound(wrongGuessSound);
                 }
 
                 // check if user won
