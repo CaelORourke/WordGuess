@@ -71,7 +71,7 @@ $(document).ready(function () {
         displayStats();
     }
 
-    function updateWordDisplay(letter) {
+    function updateLettersToDisplay(letter) {
         for (let index = 0; index < lettersInWord.length; index++) {
             if (letter === lettersInWord[index]) {
                 lettersToDisplay[index] = letter;
@@ -81,15 +81,14 @@ $(document).ready(function () {
 
     function showQuitOrContinue(title, message) {
         $('#winOrLossLabel').html(title);
-        $('#continueMessage').html(message);
+        $('#winOrLossMessage').html(message);
         $('#quitOrContinueDialog').modal('show');
     }
 
-    clearDisplay();
+    resetGame();
 
     // listen for keys that players type
     $(document).keyup(function (event) {
-        // TODO: restart the game
         if (gameStarted) {
             // NOTE: we only care about letters
             if (event.keyCode >= 65 && event.keyCode <= 90) {
@@ -105,7 +104,7 @@ $(document).ready(function () {
                 // check if key pressed is in the current word
                 if (currentWord.indexOf(keyPressed) > -1) {
                     // console.log("correct guess");
-                    updateWordDisplay(keyPressed);
+                    updateLettersToDisplay(keyPressed);
                 }
                 else {
                     // console.log("wrong guess");
