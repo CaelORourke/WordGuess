@@ -6,21 +6,31 @@ var currentWord = "";
 var lettersInWord = [];
 var lettersToDisplay = [];
 var wrongGuesses = [];
-var wordsToGuess = ["michael", "vanessa", "jo", "jacquelyn"];
 var gameStarted = false;
 
 $(document).ready(function () {
     function chooseRandomWord() {
-        // choose a word
         currentWord = wordsToGuess[Math.floor(Math.random() * wordsToGuess.length)];
+
+        console.log("currentWord='" + currentWord + "'");
+    }
+
+    function getLettersToDisplay() {
         lettersInWord = currentWord.split("");
 
         for (let index = 0; index < lettersInWord.length; index++) {
-            lettersToDisplay[index] = "_";
+            if (lettersInWord[index] === " ") {
+                lettersToDisplay[index] = " ";
+            }
+            else if (lettersInWord[index] === "-") {
+                lettersToDisplay[index] = "-";
+            }
+            else {
+                lettersToDisplay[index] = "_";
+            }
         }
 
-        // useful for debugging
-        console.log("currentWord='" + currentWord + "'");
+        console.log(lettersToDisplay);
     }
 
     function clearDisplay() {
@@ -37,7 +47,7 @@ $(document).ready(function () {
 
     function displayStats() {
         // display the current word
-        $("#currentWord").text(lettersToDisplay.join(" "));
+        $("#currentWord").html(lettersToDisplay.join("&nbsp;"));
 
         // display the wins
         $("#wins").text(wins);
@@ -67,14 +77,15 @@ $(document).ready(function () {
         lettersToDisplay = [];
         wrongGuesses = [];
         chooseRandomWord();
+        getLettersToDisplay();
         gameStarted = true;
         displayStats();
     }
 
     function updateLettersToDisplay(letter) {
         for (let index = 0; index < lettersInWord.length; index++) {
-            if (letter === lettersInWord[index]) {
-                lettersToDisplay[index] = letter;
+            if (letter === lettersInWord[index].toLowerCase()) {
+                lettersToDisplay[index] = lettersInWord[index];
             }
         }
     }
@@ -102,7 +113,7 @@ $(document).ready(function () {
                 }
 
                 // check if key pressed is in the current word
-                if (currentWord.indexOf(keyPressed) > -1) {
+                if ((currentWord.indexOf(keyPressed) > -1) || (currentWord.indexOf(keyPressed.toUpperCase()) > -1)) {
                     // console.log("correct guess");
                     updateLettersToDisplay(keyPressed);
                 }
