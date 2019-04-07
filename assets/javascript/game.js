@@ -23,6 +23,18 @@ $(document).ready(function () {
         console.log("currentWord='" + currentWord + "'");
     }
 
+    function clearDisplay() {
+        $("#currentWord, #wins, #losses, #guessesRemaining, #wrongGuesses, #currentWordLabel, #winsLabel, #lossesLabel, #guessesRemainingLabel, #wrongGuessesLabel").empty();
+    }
+
+    function displayLabels() {
+        $("#currentWordLabel").text("Word to Guess:");
+        $("#winsLabel").text("Wins:");
+        $("#lossesLabel").text("Losses:");
+        $("#guessesRemainingLabel").text("Guesses Remaining:");
+        $("#wrongGuessesLabel").text("Letters Guessed:");
+    }
+
     function displayStats() {
         // display the current word
         $("#currentWord").text(lettersToDisplay.join(" "));
@@ -40,7 +52,15 @@ $(document).ready(function () {
         $("#wrongGuesses").text(wrongGuesses.join(" "));
     }
 
-    function newGame() {
+    function resetGame() {
+        wins = 0;
+        losses = 0;
+        gameStarted = false;
+        $("#instructions").text("Press any key to get started!");
+        clearDisplay();
+    }
+
+    function newRound() {
         guessesRemaining = 10;
         keyPressed = "";
         lettersInWord = [];
@@ -64,6 +84,8 @@ $(document).ready(function () {
         $('#continueMessage').html(message);
         $('#quitOrContinueDialog').modal('show');
     }
+
+    clearDisplay();
 
     // listen for keys that players type
     $(document).keyup(function (event) {
@@ -95,7 +117,6 @@ $(document).ready(function () {
                 if (lettersInWord.toString() === lettersToDisplay.toString()) {
                     wins++;
                     showQuitOrContinue("Congratulations!", "You won!");
-                    newGame();
                 }
 
                 // check is user lost
@@ -108,17 +129,19 @@ $(document).ready(function () {
             }
         }
         else {
-            newGame();
+            $("#instructions").text("Press a letter key to guess.");
+            displayLabels();
+            newRound();
         }
     });
 
     $("#continueGameButton").on("click", function () {
         $('#quitOrContinueDialog').modal('hide');
-        // TODO: continue game
+        newRound();
     });
 
     $("#quitGameButton, #closeButton").on("click", function () {
         $('#quitOrContinueDialog').modal('hide');
-        // TODO: quit game
+        resetGame();
     });
 });
