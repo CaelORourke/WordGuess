@@ -127,6 +127,7 @@ $(document).ready(function () {
                 }
                 else {
                     lettersGuessed.push(keyPressed);
+                    lettersGuessed.sort();
                 }
 
                 // check if key pressed is in the current word
