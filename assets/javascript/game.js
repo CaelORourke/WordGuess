@@ -152,7 +152,15 @@ $(document).ready(function () {
                 // check if user won
                 if (lettersInWord.toString() === lettersToDisplay.toString()) {
                     wins++;
+                    // score points for letters in the word
                     score += getLetterScore(lettersInWord) * 100;
+
+                    if (stopwatch.time > 0)
+                    {
+                        // score points for time remaining
+                        score += (stopwatch.time * 10);
+                    }
+
                     showQuitOrContinue("Congratulations!", "You won!");
                 }
 
