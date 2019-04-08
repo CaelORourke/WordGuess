@@ -70,6 +70,7 @@ $(document).ready(function () {
         losses = 0;
         gameStarted = false;
         $("#instructions").text("Press any key to get started!");
+        resetTimer();
         clearDisplay();
     }
 
@@ -83,6 +84,7 @@ $(document).ready(function () {
         getLettersToDisplay();
         gameStarted = true;
         displayStats();
+        startTimer();
     }
 
     function updateLettersToDisplay(letter) {
@@ -94,6 +96,7 @@ $(document).ready(function () {
     }
 
     function showQuitOrContinue(title, message) {
+        stopTimer();
         $('#winOrLossLabel').html(title);
         $('#winOrLossMessage').html(message);
         $('#quitOrContinueDialog').modal('show');

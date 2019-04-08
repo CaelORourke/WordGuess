@@ -19,3 +19,11 @@ body {
 .my-4 {
     border-color: #fbab9e;
 }
+
+#timerDisplay {
+    font-family: monospace;
+    font-size: 120px;
+    text-align: center;
+    background: black;
+  }
+  
