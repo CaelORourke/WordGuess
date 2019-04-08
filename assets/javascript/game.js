@@ -73,6 +73,7 @@ $(document).ready(function () {
         score = 0;
         gameStarted = false;
         $("#instructions").text("Press any key to get started!");
+        stopwatch.startTime = 60;//seconds
         stopwatch.resetTimer();
         clearDisplay();
     }

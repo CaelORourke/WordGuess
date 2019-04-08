@@ -2,6 +2,7 @@ var stopwatch = {
     intervalId: null,
     timerRunning: false,
     time: 0,
+    startTime: 60,
     startTimer: function () {
         if (!this.timerRunning) {
             this.intervalId = setInterval(this.timerTick.bind(this), 1000);
@@ -15,14 +16,19 @@ var stopwatch = {
         }
     },
     resetTimer: function () {
-        this.time = 0;
+        this.time = this.startTime;
         this.displayTime();
     },
     displayTime: function () {
         $("#timerDisplay .card-text").text(this.formatTime(this.time));
     },
     timerTick: function () {
-        this.time++;
+        this.time--;
+        if (this.time <= 0)
+        {
+            this.stopTimer();
+            this.time = 0;
+        }
         this.displayTime();
     },
     formatTime: function (time) {
