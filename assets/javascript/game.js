@@ -14,7 +14,6 @@ $(document).ready(function () {
 
     function chooseRandomWord() {
         currentWord = wordsToGuess[Math.floor(Math.random() * wordsToGuess.length)];
-
         console.log("currentWord='" + currentWord + "'");
     }
 
@@ -32,8 +31,15 @@ $(document).ready(function () {
                 lettersToDisplay[index] = "_";
             }
         }
-
         // console.log(lettersToDisplay);
+    }
+
+    function getScore(letters) {
+        var score = 0;
+        for (var i = 0; i < letters.length; ++i) {
+            score += letterScores[letters[i]] || 0;
+        }
+        return score;
     }
 
     function clearDisplay() {
@@ -82,6 +88,7 @@ $(document).ready(function () {
         lettersGuessed = [];
         chooseRandomWord();
         getLettersToDisplay();
+        console.log(getScore(lettersInWord));
         gameStarted = true;
         displayStats();
         stopwatch.startTimer();
