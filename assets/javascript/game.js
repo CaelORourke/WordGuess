@@ -7,6 +7,7 @@ var lettersInWord = [];
 var lettersToDisplay = [];
 var lettersGuessed = [];
 var gameStarted = false;
+var score = 0;
 
 $(document).ready(function () {
     var correctGuessSound = $("#correctGuessSound")[0];
@@ -43,13 +44,11 @@ $(document).ready(function () {
     }
 
     function clearDisplay() {
-        $("#currentWord, #wins, #losses, #guessesRemaining, #lettersGuessed, #currentWordLabel, #winsLabel, #lossesLabel, #guessesRemainingLabel, #lettersGuessedLabel").empty();
+        $("#currentWord, #guessesRemaining, #lettersGuessed, #currentWordLabel, #lossesLabel, #guessesRemainingLabel, #lettersGuessedLabel").empty();
     }
 
     function displayLabels() {
         $("#currentWordLabel").text("Word to Guess:");
-        $("#winsLabel").text("Wins:");
-        $("#lossesLabel").text("Losses:");
         $("#guessesRemainingLabel").text("Guesses Remaining:");
         $("#lettersGuessedLabel").text("Letters Guessed:");
     }
@@ -58,11 +57,8 @@ $(document).ready(function () {
         // display the current word
         $("#currentWord").html(lettersToDisplay.join("&nbsp;"));
 
-        // display the wins
-        $("#wins").text(wins);
-
-        // display the losses
-        $("#losses").text(losses);
+        // display the score
+        $("#score").text(score);
 
         // display the guesses remaining
         $("#guessesRemaining").text(guessesRemaining);
@@ -74,6 +70,7 @@ $(document).ready(function () {
     function resetGame() {
         wins = 0;
         losses = 0;
+        score = 0;
         gameStarted = false;
         $("#instructions").text("Press any key to get started!");
         stopwatch.resetTimer();
@@ -88,7 +85,6 @@ $(document).ready(function () {
         lettersGuessed = [];
         chooseRandomWord();
         getLettersToDisplay();
-        console.log(getScore(lettersInWord));
         gameStarted = true;
         displayStats();
         stopwatch.startTimer();
@@ -155,6 +151,7 @@ $(document).ready(function () {
                 // check if user won
                 if (lettersInWord.toString() === lettersToDisplay.toString()) {
                     wins++;
+                    score += getScore(lettersInWord);
                     showQuitOrContinue("Congratulations!", "You won!");
                 }
 
