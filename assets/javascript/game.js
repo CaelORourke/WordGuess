@@ -35,7 +35,7 @@ $(document).ready(function () {
         // console.log(lettersToDisplay);
     }
 
-    function getScore(letters) {
+    function getLetterScore(letters) {
         var score = 0;
         for (var i = 0; i < letters.length; ++i) {
             score += letterScores[letters[i]] || 0;
@@ -151,7 +151,7 @@ $(document).ready(function () {
                 // check if user won
                 if (lettersInWord.toString() === lettersToDisplay.toString()) {
                     wins++;
-                    score += getScore(lettersInWord);
+                    score += getLetterScore(lettersInWord) * 100;
                     showQuitOrContinue("Congratulations!", "You won!");
                 }
 
