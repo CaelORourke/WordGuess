@@ -1,6 +1,6 @@
 var wins = 0;
 var losses = 0;
-var guessesRemaining = 10;
+var guessesRemaining = 6;
 var keyPressed = "";
 var currentWord = "";
 var lettersInWord = [];
@@ -79,7 +79,7 @@ $(document).ready(function () {
     }
 
     function newRound() {
-        guessesRemaining = 10;
+        guessesRemaining = 6;
         keyPressed = "";
         lettersInWord = [];
         lettersToDisplay = [];
@@ -128,7 +128,7 @@ $(document).ready(function () {
     };
 
     stopwatch.timesUp = function () {
-        showGameOver("Time's up!")
+        showGameOver("Time's up!");
     };
 
     resetGame();
@@ -180,7 +180,8 @@ $(document).ready(function () {
                 // check is user lost
                 if (guessesRemaining < 1) {
                     losses++;
-                    showQuitOrContinue("Sorry!", "You lost!");
+                    stopwatch.stopTimer();
+                    showGameOver("You lost!");
                 }
 
                 displayStats()
