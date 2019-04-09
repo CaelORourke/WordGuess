@@ -88,6 +88,7 @@ $(document).ready(function () {
         getLettersToDisplay();
         gameStarted = true;
         displayStats();
+        stopwatch.resetTimer();
         stopwatch.startTimer();
     }
 
@@ -106,6 +107,11 @@ $(document).ready(function () {
         $('#quitOrContinueDialog').modal('show');
     }
 
+    function showGameOver(message) {
+        $('#gameOverMessage').html(message);
+        $('#gameOverDialog').modal('show');
+    }
+
     function playSound(sound) {
         if (sound.paused) {
             sound.play();
@@ -116,6 +122,14 @@ $(document).ready(function () {
             sound.play();
         }
     }
+
+    stopwatch.displayTime = function (time) {
+        $("#timerDisplay .card-text").text(time)
+    };
+
+    stopwatch.timesUp = function () {
+        showGameOver("Time's up!")
+    };
 
     resetGame();
 
@@ -155,8 +169,7 @@ $(document).ready(function () {
                     // score points for letters in the word
                     score += getLetterScore(lettersInWord) * 100;
 
-                    if (stopwatch.time > 0)
-                    {
+                    if (stopwatch.time > 0) {
                         // score points for time remaining
                         score += (stopwatch.time * 10);
                     }
@@ -187,6 +200,11 @@ $(document).ready(function () {
 
     $("#quitGameButton, #closeButton").on("click", function () {
         $('#quitOrContinueDialog').modal('hide');
+        resetGame();
+    });
+
+    $("#okButton").on("click", function () {
+        $('#gameOverDialog').modal('hide');
         resetGame();
     });
 });

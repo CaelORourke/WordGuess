@@ -87,6 +87,27 @@
         </div>
     </div>
 
+    <!-- let the player decide if they want to continue or quit -->
+    <div class="modal fade" id="gameOverDialog" tabindex="-1" role="dialog" aria-labelledby="gameOverLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gameOverLabel">Game Over!</h5>
+                    <button id="closeButton" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="gameOverMessage" class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button id="okButton" type="button" class="btn btn-primary">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <audio id="correctGuessSound" src="assets/sounds/sms-alert-1-daniel_simon.mp3"></audio>
     <audio id="wrongGuessSound" src="assets/sounds/fire_bow_sound-mike-koenig.mp3"></audio>
 

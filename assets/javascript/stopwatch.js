@@ -17,32 +17,41 @@ var stopwatch = {
     },
     resetTimer: function () {
         this.time = this.startTime;
-        this.displayTime();
+        if (typeof this.displayTime === "function") {
+            this.displayTime(this.formatTime(this.time));
+        }
     },
-    displayTime: function () {
-        $("#timerDisplay .card-text").text(this.formatTime(this.time));
+    displayTime: function (time) {
+    },
+    timesUp: function () {
     },
     timerTick: function () {
         this.time--;
-        if (this.time <= 0)
-        {
+
+        if (typeof this.displayTime === "function") {
+            this.displayTime(this.formatTime(this.time));
+        }
+
+        if (this.time <= 0) {
             this.stopTimer();
             this.time = 0;
+            if (typeof this.timesUp === "function") {
+                this.timesUp();
+            }
         }
-        this.displayTime();
     },
     formatTime: function (time) {
         var minutes = Math.floor(time / 60);
         var seconds = time - (minutes * 60);
-    
+
         if (seconds < 10) {
             seconds = "0" + seconds;
         }
-    
+
         if (minutes < 10) {
             minutes = "0" + minutes;
         }
-    
+
         return minutes + ":" + seconds;
     }
 }
