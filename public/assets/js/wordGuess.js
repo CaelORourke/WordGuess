@@ -1,4 +1,6 @@
-const wordGuess = (function () {
+import {wordsToGuess} from "./catBreeds.js";
+
+export const wordGuess = (function () {
     let currentWord = "";
     let gameLost = false;
     let gameStarted = false;

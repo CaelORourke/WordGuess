@@ -1,3 +1,6 @@
+import {stopwatch} from "./stopwatch.js";
+import {wordGuess} from "./wordGuess.js";
+
 $(document).ready(function () {
     const correctGuessSound = $("#correctGuessSound")[0];
     const wrongGuessSound = $("#wrongGuessSound")[0];

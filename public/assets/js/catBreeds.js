@@ -1,4 +1,4 @@
-var wordsToGuess = [
+export const wordsToGuess = [
     "Abyssinian",
     "American Bobtail",
     "American Curl",

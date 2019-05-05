@@ -1,4 +1,4 @@
-const stopwatch = (function () {
+export const stopwatch = (function () {
     let displayTime = null;
     let intervalId = null;
     let startTime = 60;
