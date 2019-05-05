@@ -22,8 +22,33 @@ body {
 
 #timerDisplay {
     font-family: monospace;
-    font-size: 120px;
+    font-size: 75px;
     text-align: center;
     background: black;
-  }
-  
+}
+
+.card-title {
+    min-height: 24px;
+}
+
+.card-text {
+    min-height: 24px;
+}
+
+.btn-primary {
+    background-color: #721121;
+    border-color: #fbab9e;
+}
+
+.btn-primary:hover {
+    background-color: #fbab9e;
+    border-color: #721121;
+}
+
+.modal-header {
+    color: #721121;
+}
+
+.modal-body {
+    color: #721121;
+}
