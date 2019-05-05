@@ -1,0 +1,23 @@
+{
+  "name": "wordguess",
+  "version": "1.0.0",
+  "description": "Guess the letters in a randomly chosen word.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaelORourke/WordGuess.git"
+  },
+  "author": "Shane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaelORourke/WordGuess/issues"
+  },
+  "homepage": "https://github.com/CaelORourke/WordGuess#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
