@@ -11,6 +11,9 @@ Play the latest version at [https://nameless-springs-78473.herokuapp.com/](https
 - Javascript
 - Bootstrap
 - jQuery
+- Node.js
+- Express
+- Firebase
 
 ## Contributors
 - Just me, for now!
