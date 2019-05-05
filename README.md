@@ -3,7 +3,7 @@ Guess the letters in a randomly chosen word.
 
 HINT: All of the words are cat breeds.
 
-Play the latest version at [https://caelorourke.github.io/WordGuess/](https://caelorourke.github.io/WordGuess/).
+Play the latest version at [https://nameless-springs-78473.herokuapp.com/](https://nameless-springs-78473.herokuapp.com/).
 
 ## Technologies Used
 - HTML
