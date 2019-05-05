@@ -52,3 +52,8 @@ body {
 .modal-body {
     color: #721121;
 }
+
+#highScoreDisplay {
+    float: right;
+    width: 30%;
+}

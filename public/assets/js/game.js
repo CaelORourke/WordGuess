@@ -1,6 +1,21 @@
 import {stopwatch} from "./stopwatch.js";
 import {wordGuess} from "./wordGuess.js";
 
+var firebaseConfig = {
+    apiKey: "AIzaSyAO1ORpCe_Wpz1ER-625_YyYkNIS1x3WFw",
+    authDomain: "nameless-springs-78473.firebaseapp.com",
+    databaseURL: "https://nameless-springs-78473.firebaseio.com",
+    projectId: "nameless-springs-78473",
+    storageBucket: "nameless-springs-78473.appspot.com",
+    messagingSenderId: "295683947244",
+    appId: "1:295683947244:web:c77c0a1e459b7c4d"
+};
+
+firebase.initializeApp(firebaseConfig);
+var database = firebase.database();
+
+var highScore = 0;
+
 $(document).ready(function () {
     const correctGuessSound = $("#correctGuessSound")[0];
     const wrongGuessSound = $("#wrongGuessSound")[0];
@@ -42,7 +57,7 @@ $(document).ready(function () {
 
     function resetGame() {
         wordGuess.resetGame();
-        stopwatch.startTime = 60;//seconds
+        stopwatch.startTime = 60;// seconds
         stopwatch.resetTimer();
         clearDisplay();
         $("#instructions").text("Press any key to get started!");
@@ -97,7 +112,7 @@ $(document).ready(function () {
         }
 
         if (wordGuess.getGameStarted()) {
-            if (event.which === 32)//spacebar
+            if (event.which === 32)// spacebar
             {
                 stopwatch.stopTimer();
                 showGameOver("You lost!");
@@ -121,6 +136,12 @@ $(document).ready(function () {
                 }
 
                 if (wordGuess.hasUserWon()) {
+                    if (wordGuess.getScore() > highScore) {
+                        var newHighScore = wordGuess.getScore();
+                        database.ref().set({
+                            highScore: newHighScore
+                        });
+                    }
                     showQuitOrContinue("Congratulations!", "You won!");
                 }
 
@@ -137,5 +158,17 @@ $(document).ready(function () {
             displayLabels();
             newRound();
         }
+    });
+
+    // NOTE: this is called on initial load and for each change after that.
+    database.ref().on("value", function(snapshot) {
+        if (snapshot.child("highScore").exists()) {
+            highScore = parseInt(snapshot.val().highScore);
+        }
+        // console.log(highScore);
+        $("#highScore").text(highScore);
+    },
+    function(errorObject) {
+        console.log("The read failed: " + errorObject.code);
     });
 });
