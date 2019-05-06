@@ -32,9 +32,13 @@ $(document).ready(function () {
 
     function displayStats() {
         $("#currentWord").html(wordGuess.getLettersToDisplay().join("&nbsp;"));
-        $("#score").text(wordGuess.getScore());
+        $("#score").text(formatScore(wordGuess.getScore()));
         $("#guessesRemaining").text(wordGuess.getGuessesRemaining());
         $("#lettersGuessed").text(wordGuess.getLettersGuessed().join(" "));
+    }
+
+    function formatScore(score) {
+        return score.toLocaleString('en-US');
     }
 
     function newRound() {
@@ -166,7 +170,7 @@ $(document).ready(function () {
             highScore = parseInt(snapshot.val().highScore);
         }
         // console.log(highScore);
-        $("#highScore").text(highScore);
+        $("#highScore").text(formatScore(highScore));
     },
     function(errorObject) {
         console.log("The read failed: " + errorObject.code);
