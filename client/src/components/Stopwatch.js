@@ -1,4 +1,4 @@
-export const stopwatch = (function () {
+const stopwatch = (function () {
     let displayTime = null;
     let intervalId = null;
     let startTime = 60;
@@ -38,6 +38,10 @@ export const stopwatch = (function () {
     };
 
     let timer = {
+        getTime() {
+            return time;
+        },
+
         onDisplayTime(displayTimeCallback) {
             displayTime = displayTimeCallback;
         },
@@ -70,3 +74,5 @@ export const stopwatch = (function () {
 
     return timer;
 })();
+
+export default stopwatch;
