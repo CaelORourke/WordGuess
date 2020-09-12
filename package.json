@@ -24,7 +24,7 @@
   "homepage": "https://github.com/CaelORourke/WordGuess#readme",
   "dependencies": {
     "express": "^4.16.4",
-    "node-fetch": "^2.5.0"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.0"
